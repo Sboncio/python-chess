@@ -1,4 +1,5 @@
 import pygame
+import os
 
 
 def main():
@@ -18,7 +19,7 @@ def main():
                    [1,0,1,0,1,0,1,0],
                    [0,1,0,1,0,1,0,1]]
 
-    pawn_piece = pygame.image.load('test_image.png')
+    pawn_piece = pygame.image.load(os.path.join('assets/test_image.png'))
 
     piece_positions = [['e','e','e','e','e','e','e','e'],
                        ['p','p','p','p','p','p','p','p'],
@@ -44,12 +45,22 @@ def main():
 
     running = True
     while running:
+
+        for i in range(8):
+            for j in range(8):
+
+                if chess_board[i][j] == 1:
+                    colour = (10,10,10)
+                else:
+                    colour = (255,255,255)
+                square = pygame.Rect(j*64,i*64,64,64)
+                pygame.draw.rect(screen,colour,square)
+
         for i in range(8):
             for j in range(8):
                 if piece_positions[i][j] == 'p':
                     screen.blit(pawn_piece,(64*j,64*i))
-                else :
-                    #clear the moved piece
+                
 
         pygame.display.update()
         for event in pygame.event.get():
